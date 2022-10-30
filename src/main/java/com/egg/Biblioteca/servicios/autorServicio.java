@@ -37,15 +37,15 @@ public class autorServicio {
 
     }
 
+   
     public List<autor> listarAutores() {
 
-        List<autor> autores = new ArrayList();
-
-        autores = aRepositorio.findAll();
+        List<autor> autores = aRepositorio.findAll(); 
 
         return autores;
     }
 
+    @Transactional
     public void modificarAutor(String id,String nombre)throws miException {
 
         validar(nombre);
@@ -62,6 +62,7 @@ public class autorServicio {
 
     }
 
+    
     private void validar(String nombre) throws miException{
         
         if(nombre.isEmpty()||nombre==null){

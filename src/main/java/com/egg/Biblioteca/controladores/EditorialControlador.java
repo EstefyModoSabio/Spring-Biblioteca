@@ -6,7 +6,7 @@
 package com.egg.Biblioteca.controladores;
 
 import com.egg.Biblioteca.excepciones.miException;
-import com.egg.Biblioteca.servicios.autorServicio;
+import com.egg.Biblioteca.servicios.editorialServicio;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,34 +17,36 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-
-
+/**
+ *
+ * @author usuario
+ */
 @Controller
-@RequestMapping("/autor")
+@RequestMapping("/editorial")
 
-public class AutorControlador {
-    
+public class EditorialControlador {
+
     @Autowired
-     autorServicio autorservicio;
-    
- @GetMapping("/registrar")
- public String registrar (){
- return "autor_registro.html";
- }
-    
- @PostMapping("/registro")  
-public String registro (@RequestParam String nombre, ModelMap modelo) {
+    editorialServicio editorialservicio;
+
+    @GetMapping("/registrar")
+    public String registrar() {
+        return "editorial_registro.html";
+    }
+
+    @PostMapping("/registro")
+    public String registro(@RequestParam String nombreEditorial, ModelMap modelo) {
 
         try {
-            autorservicio.crearAutor(nombre);
-            modelo.put("exito", "El Autor fue cargado con exito");
-       } catch (miException ex) {
-            Logger.getLogger(AutorControlador.class.getName()).log(Level.SEVERE, null, ex);
+            editorialservicio.crearEditorial(nombreEditorial);
+            modelo.put("exito", "La editorial fue cargada con exito");
+        } catch (miException ex) {
+            Logger.getLogger(EditorialControlador.class.getName()).log(Level.SEVERE, null, ex);
             modelo.put("error", ex.getMessage());
-            return "autor_registro.html";
+            return "editorial_registro.html";
         }
- 
+
         return "index.html";
-}   
+    }
 
 }

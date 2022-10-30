@@ -37,10 +37,9 @@ public class libroServicio {
     private libroRepositorio lRepositorio;
     
     @Transactional
-    
     public void crearLibro(Long isbn, String titulo,Integer ejemplares,String idAutor, String idEditorial ) throws miException{
         
-         validar(isbn,titulo,idAutor,idEditorial,ejemplares);
+        validar(isbn,titulo,idAutor,idEditorial,ejemplares);
         
         autor autor=aRepositorio.findById(idAutor).get();
         editorial editorial=eRepositorio.findById(idEditorial).get();
@@ -63,6 +62,7 @@ public class libroServicio {
     return libros;
 }
     
+    @Transactional
     public void modificarLibro (Long isbn,String titulo,String idAutor,String idEditorial, Integer ejemplares)throws miException{
     
         validar(isbn,titulo,idAutor,idEditorial,ejemplares);
@@ -95,8 +95,7 @@ public class libroServicio {
             libro.setEjemplares(ejemplares);
             
             lRepositorio.save(libro);
-            
-            
+           
         }
         
     }

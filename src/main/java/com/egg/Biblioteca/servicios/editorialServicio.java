@@ -38,13 +38,16 @@ public class editorialServicio {
             
     }
     
+   
     public List <editorial> listarEditoriales() {
     
-    List <editorial> editoriales=new ArrayList();
-    editoriales= eRepositorio.findAll();
+    List <editorial> editoriales=eRepositorio.findAll();
+            
+    
     return editoriales;
 }
     
+    @Transactional
     public void modificarEditorial(String id,String nombre)throws miException {
         
         validar( nombre);
