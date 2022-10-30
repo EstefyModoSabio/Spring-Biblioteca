@@ -39,29 +39,29 @@ public class LibroControlador {
 
     @GetMapping("/registrar")
     public String registrar(ModelMap modelo) {
-        
-      List <autor> autores= autorservicio.listarAutores();
-      List <editorial> editoriales=editorialservicio.listarEditoriales();
-       
-       modelo.addAttribute("autores" , autores);
-      modelo.addAttribute("editoriales",editoriales);
-       
+
+        List<autor> autores = autorservicio.listarAutores();
+        List<editorial> editoriales = editorialservicio.listarEditoriales();
+
+        modelo.addAttribute("autores", autores);
+        modelo.addAttribute("editoriales", editoriales);
+
         return "libro_registro.html";
     }
 
     @PostMapping("/registro")
     public String registro(@RequestParam(required = false) Long isbn,
-            @RequestParam String titulo, 
-            @RequestParam(required = false) Integer ejemplares, 
-            @RequestParam String idAutor, 
+            @RequestParam String titulo,
+            @RequestParam(required = false) Integer ejemplares,
+            @RequestParam String idAutor,
             @RequestParam String idEditorial, ModelMap modelo) {
 
         try {
             libroservicio.crearLibro(isbn, titulo, ejemplares, idAutor, idEditorial);
-            modelo.put("exito" ,"El libro fue cargado correctamente");
-            
+            modelo.put("exito", "El libro fue cargado correctamente");
+
         } catch (miException ex) {
-            
+
             modelo.put("error", ex.getMessage());
             return ("libro_registro.html");
         }
